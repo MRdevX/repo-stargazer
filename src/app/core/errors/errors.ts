@@ -29,8 +29,13 @@ const ERRORS = {
     API_ERROR: createError("GITHUB_API_ERROR", "GitHub API request failed"),
     RATE_LIMIT_EXCEEDED: createError("GITHUB_RATE_LIMIT_EXCEEDED", "GitHub API rate limit exceeded"),
     INVALID_QUERY: createError("GITHUB_INVALID_QUERY", "Invalid search query provided"),
-    REPOSITORY_NOT_FOUND: createError("GITHUB_REPOSITORY_NOT_FOUND", "Repository not found"),
+    REPOSITORY_NOT_FOUND: (repositoryId?: string) =>
+      createError(
+        "GITHUB_REPOSITORY_NOT_FOUND",
+        repositoryId ? `Repository '${repositoryId}' not found` : "Repository not found",
+      ),
     UNAUTHORIZED: createError("GITHUB_UNAUTHORIZED", "GitHub API authentication failed"),
+    FORBIDDEN: createError("GITHUB_FORBIDDEN", "GitHub API access forbidden or secondary rate limit exceeded"),
   },
 };
 
