@@ -43,12 +43,12 @@ export class GithubService {
   }
 
   private buildQuery(params: RepositorySearchParams): string {
-    const query = `q=${encodeURIComponent(params.query)}`;
     const filters = [
       params.language && `+language:${params.language}`,
       params.created && `+created:${params.created}`,
     ].filter(Boolean);
 
-    return query + filters.join("");
+    const fullSearchString = params.query + filters.join("");
+    return `q=${encodeURIComponent(fullSearchString)}`;
   }
 }
